@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  <SERVICE_NAME>:
+    image: <YOUR_IMAGE>
+    container_name: <CONTAINER_NAME>
+    labels:
+      - traefik.http.routers.YOUR_ROUTER.rule=Host(`<SUBDOMAIN.DOMAIN.COM>`)
+      - traefik.http.routers.YOUR_ROUTER.tls=true
+      - traefik.http.routers.YOUR_ROUTER.tls.certresolver=lets-encrypt
+      - traefik.http.routers.YOUR_ROUTER.tls.domains[0].main=<SUBDOMAIN.DOMAIN.COM>
+      - traefik.port=8080
+    ports:
+      - "8080:8080" #example
+
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
+
